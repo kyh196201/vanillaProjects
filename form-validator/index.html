@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./style.css" />
+        <title>Form Validator</title>
+    </head>
+    <body>
+        <div id="container">
+            <h2 class="form__title">Register With Us</h2>
+            <form id="form">
+                <div class="form__row">
+                    <label for="" class="form__label"> Username </label>
+                    <input
+                        type="text"
+                        id="username"
+                        class="form__input"
+                        name="username"
+                        placeholder="Enter username"
+                        min="3"
+                    />
+                    <p class="form__error">
+                        Username must be at least 3 charaters.
+                    </p>
+                </div>
+                <div class="form__row">
+                    <label for="" class="form__label"> Email </label>
+                    <input
+                        type="text"
+                        id="email"
+                        class="form__input"
+                        name="email"
+                        placeholder="Enter email"
+                    />
+                    <p class="form__error">Email is not valid.</p>
+                </div>
+                <div class="form__row">
+                    <label for="" class="form__label"> Password </label>
+                    <input
+                        type="password"
+                        id="password"
+                        class="form__input"
+                        name="password"
+                        placeholder="Enter password"
+                    />
+                    <p class="form__error">
+                        Password must bbe at least 6 charaters.
+                    </p>
+                </div>
+                <div class="form__row">
+                    <label for="" class="form__label"> Confirm Password </label>
+                    <input
+                        type="password"
+                        id="password2"
+                        class="form__input"
+                        name="password2"
+                        placeholder="Enter password agin"
+                    />
+                    <p class="form__error">Password2 is required.</p>
+                </div>
+                <button type="submit" class="form__submitBtn">Submit</button>
+            </form>
+        </div>
+        <script src="./script.js"></script>
+    </body>
+</html>
