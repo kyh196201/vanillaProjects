@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./style.css" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="container">
+            <div class="wrapper">
+                <section class="movie-container">
+                    <label for="movie" class="movieLabel">Pick a movie :</label>
+                    <select class="movie" name="movie" id="movie">
+                        <option value="10">Avengers Endgame ($10)</option>
+                    </select>
+                </section>
+
+                <section class="showcase-container">
+                    <ul class="showcase">
+                        <li>
+                            <span class="seat">좌석</span>
+                            <span class="seatName">N/A</span>
+                        </li>
+                        <li>
+                            <span class="seat seat--selected">좌석</span>
+                            <span class="seatName">Selected</span>
+                        </li>
+                        <li>
+                            <span class="seat seat--occupied">좌석</span>
+                            <span class="seatName">Occupied</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="theater">
+                    <div class="theater__screen">스크린</div>
+                    <ul id="seats" class="theater__seatList">
+                        <li class="seat"></li>
+                    </ul>
+                </section>
+
+                <p class="result">
+                    You have selected
+                    <span id="totalSeats" class="totalSeats">0</span> seats for
+                    a price of $<span id="totalPrice" class="totalPrice"
+                        >0</span
+                    >
+                </p>
+            </div>
+        </div>
+        <script src="./script.js"></script>
+    </body>
+</html>

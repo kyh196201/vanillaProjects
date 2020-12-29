@@ -1,0 +1,179 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+body,
+html,
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.2%;
+}
+
+:root {
+    --main-color: #242333;
+    --white-color: #ffffff;
+    --selected-color: #6feaf6;
+    --seat-color: #444451;
+}
+
+body {
+    background-color: var(--main-color);
+    color: var(--white-color);
+    font-family: "Roboto", sans-serif;
+    font-size: 1.5rem;
+}
+
+input,
+button,
+select {
+    outline: none;
+}
+
+#container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40rem;
+    border: 1px solid red;
+}
+
+.movie-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 3.5rem 0;
+    font-size: 1.8rem;
+}
+
+.movieLabel {
+    margin: 0 1rem 0 0;
+}
+
+.movie {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: bold;
+
+    /* 네이티브 외형 감추기 */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-family: inherit;
+    /* 화살표 모양의 이미지 */
+    /* background: url(이미지 경로) no-repeat 95% 50%; */
+    cursor: pointer;
+}
+
+/* IE 10, 11의 네이티브 화살표 숨기기 */
+select::-ms-expand {
+    display: none;
+}
+
+.showcase {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 4rem;
+    padding: 0.5rem 2rem;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #777;
+    border-radius: 0.5rem;
+    font-size: 1.4rem;
+    list-style: none;
+}
+
+.showcase li {
+    display: flex;
+    align-items: center;
+}
+
+.showcase li:not(:last-child) {
+    margin: 0 2rem 0 0;
+}
+
+.seat {
+    display: inline-block;
+    width: 1.6rem;
+    height: 1.2rem;
+    background-color: var(--seat-color);
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    font-size: 0px;
+}
+
+.seat.seat--selected {
+    background-color: var(--selected-color);
+}
+
+.seat.seat--occupied {
+    background-color: var(--white-color);
+}
+
+.showcase .seat {
+    margin-right: 0.5rem;
+}
+
+.theater {
+    width: 20rem;
+}
+
+.theater__screen {
+    height: 6rem;
+    margin: 0 0 2rem 0;
+    background-color: var(--white-color);
+}
+
+.theater__seatList {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.theater__seatList .seat:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.theater__seatList .seat.seat--occupied:hover {
+    transform: none;
+    cursor: default;
+}
+
+.theater .seat {
+    margin-right: 0.7rem;
+    margin-bottom: 0.5rem;
+}
+
+.theater .seat:nth-child(8n) {
+    margin-right: 0;
+}
+
+.theater .seat:nth-child(8n + 2) {
+    margin-right: 1.4rem;
+}
+
+/* NOTE 8n, 8n+2 TIL에 필기 */
+.theater .seat:nth-child(8n + 6) {
+    margin-right: 1.4rem;
+}
+
+.totalPrice,
+.totalSeats {
+    color: var(--selected-color);
+}
