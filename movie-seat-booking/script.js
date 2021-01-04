@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", (e) => {
-    const $movie = document.getElementById("movie");
+    const $movieSelector = document.getElementById("movie");
     const $seats = document.getElementById("seats");
     const $totalSeats = document.getElementById("totalSeats");
     const $totalPrice = document.getElementById("totalPrice");
@@ -23,23 +23,33 @@ document.addEventListener("DOMContentLoaded", (e) => {
         },
     ];
 
-    let selectedSeats = [4, 8];
-    let occupiedSeats = [10];
-    let selectedCost = $movie.value;
+    let selectedSeats = getSeatData();
+    let selectedMovieIndex = getMovieData();
+    let occupiedSeats = [10, 12, 22];
 
-    $movie.addEventListener("change", onChangeMovie);
+    $movieSelector.addEventListener("change", onChangeMovie);
     $seats.addEventListener("click", onClickSeat);
 
-    function drawMovies(movies) {
-        $movie.innerHTML = movies
-            .map((movie) => {
+    render();
+
+    // functions
+    // render movie select
+    function drawMovies() {
+        $movieSelector.innerHTML = movies
+            .map((movie, index) => {
                 return `<option value="${movie.cost}" ${
-                    movie.selected ? "selected" : ""
+                    isSelected(index) ? "selected" : ""
                 }>${movie.title}</option>`;
             })
             .join("");
     }
 
+    // check select item is checked
+    function isSelected(index) {
+        return +selectedMovieIndex === index;
+    }
+
+    // render seats
     function drawSeats() {
         let htmlString = "";
 
@@ -60,26 +70,27 @@ document.addEventListener("DOMContentLoaded", (e) => {
         $seats.innerHTML = htmlString;
     }
 
-    function showSelectedSeats() {
-        $totalSeats.innerHTML = selectedSeats.length;
+    function render() {
+        drawSeats();
+        drawMovies();
+        updateSelectedCount();
     }
 
-    function showTotalPrice() {
-        $totalPrice.innerHTML = selectedCost * selectedSeats.length;
+    function updateSelectedCount() {
+        $totalSeats.innerHTML = selectedSeats.length;
+        $totalPrice.innerHTML = $movieSelector.value * selectedSeats.length;
     }
 
     // NOTE 화살표 함수를 썼을 경우, 이벤트핸들러 this === undefined,
     // NOTE 일반 함수로 썼을경우 this === 자기 자신
     function onChangeMovie(e) {
-        selectedCost = this.value;
-        showTotalPrice();
+        setMovieData();
+        updateSelectedCount();
     }
 
     function selectSeat(id) {
         selectedSeats = [...selectedSeats, id];
-        drawSeats();
-        showSelectedSeats();
-        showTotalPrice();
+        setSeatData();
     }
 
     function removeSeat(id) {
@@ -89,6 +100,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
             ...selectedSeats.slice(0, index),
             ...selectedSeats.slice(index + 1),
         ];
+        setSeatData();
     }
 
     function onClickSeat(e) {
@@ -106,12 +118,35 @@ document.addEventListener("DOMContentLoaded", (e) => {
             selectSeat(seatId);
         }
         drawSeats();
-        showSelectedSeats();
-        showTotalPrice();
+        updateSelectedCount();
     }
 
-    drawMovies(movies);
-    drawSeats();
-    showSelectedSeats();
-    showTotalPrice();
+    // save selectedSeats to localStorage
+    function setSeatData() {
+        localStorage.setItem("selectedSeats", JSON.stringify(selectedSeats));
+    }
+
+    // load selectedSeats to localStorage
+    function getSeatData() {
+        const seats = localStorage.getItem("selectedSeats");
+
+        if (seats !== null) {
+            return JSON.parse(seats);
+        } else {
+            return [];
+        }
+    }
+
+    // save selected movie
+    function setMovieData() {
+        localStorage.setItem(
+            "selectedMovieIndex",
+            $movieSelector.selectedIndex
+        );
+    }
+
+    // load selected movie
+    function getMovieData() {
+        return localStorage.getItem("selectedMovieIndex") || 0;
+    }
 });
