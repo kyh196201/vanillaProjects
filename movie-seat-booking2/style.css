@@ -42,7 +42,6 @@ ul {
 }
 
 #container {
-    border: 3px solid red;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -3,6 +3,11 @@ const $totalCount = document.getElementById("totalCount");
 const $totalPrice = document.getElementById("totalPrice");
 const $seats = document.getElementById("seats");
 
+const LS_KEY = {
+    movie: "selectedMovieIndex",
+    selected: "selectedSeats",
+};
+
 const movies = [
     {
         title: "Avengers Endgame ($10)",
@@ -22,8 +27,8 @@ const movies = [
     },
 ];
 
-let selectedMovieIndex = 0;
-let selectedSeats = [11];
+let selectedMovieIndex = getMovieIndex();
+let selectedSeats = getSelectedSeats();
 let occupiedSeats = [22, 30, 32, 44, 45, 46, 47];
 
 init();
@@ -32,9 +37,14 @@ init();
 function init() {
     console.log("[init]");
     renderMovie(movies);
+    populateUI();
+    bindEvents();
+}
+
+function populateUI() {
+    $movie.selectedIndex = selectedMovieIndex;
     renderSeats();
     updateText();
-    bindEvents();
 }
 
 // update price & total
@@ -70,6 +80,8 @@ function renderSeats() {
 
 // movie change event
 function onChangeMovie(e) {
+    const index = e.target.selectedIndex;
+    setMovieIndex(index);
     updateText();
 }
 
@@ -90,6 +102,7 @@ function onClickSeat(e) {
         selectedSeats = [...selectedSeats, index].sort();
     }
 
+    setSelectedSeats(selectedSeats);
     updateText();
 }
 
@@ -104,4 +117,26 @@ function removeFromArray(arr, value) {
         return item === value;
     });
     return [...arr.slice(0, index), ...arr.slice(index + 1)];
+}
+
+// get selectedMovieIndex from localStorage
+function getMovieIndex() {
+    return localStorage.getItem(LS_KEY.movie) || 0;
+}
+
+// save selectedMovieIndex to localStorage
+function setMovieIndex(index) {
+    localStorage.setItem(LS_KEY.movie, index);
+}
+
+// get selectedSeats from localStorage
+function getSelectedSeats() {
+    const seatArr = localStorage.getItem(LS_KEY.selected);
+
+    return seatArr ? JSON.parse(seatArr) : [];
+}
+
+// save selectedSeats to localStorage
+function setSelectedSeats(seatArr) {
+    localStorage.setItem(LS_KEY.selected, JSON.stringify(seatArr));
 }
