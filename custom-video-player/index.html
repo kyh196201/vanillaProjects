@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+        />
+        <link rel="stylesheet" href="./style.css" />
+        <title>Custom Video Player</title>
+    </head>
+    <body>
+        <div id="container">
+            <h1 class="title">Custom Video Player</h1>
+            <div class="video-wrapper">
+                <video id="player" controls>
+                    <source src="./gone.mp4" type="video/mp4" />
+                    이 문장은 여러분의 브라우저가 video 태그를 지원하지 않을 때
+                    화면에 표시됩니다!
+                </video>
+                <div class="controller">
+                    <button
+                        type="button"
+                        id="play"
+                        class="controller__btn play"
+                    >
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button
+                        type="button"
+                        id="pause"
+                        class="controller__btn pause hide"
+                    >
+                        <i class="fas fa-pause"></i>
+                    </button>
+                    <button
+                        type="button"
+                        id="stop"
+                        class="controller__btn stop"
+                    >
+                        <i class="fas fa-stop"></i>
+                    </button>
+                    <div class="timeline">
+                        <div id="timelineBar" class="timeline__bar">
+                            <!-- <div class="timeline__bar--left"></div>
+                            <div class="timeline__bar--right"></div> -->
+                        </div>
+                        <button
+                            type="button"
+                            id="timelineControl"
+                            class="timeline__control"
+                        ></button>
+                    </div>
+                    <span id="timeSpan" class="timeSpan">00:00</span>
+                </div>
+            </div>
+        </div>
+        <script src="./script.js"></script>
+    </body>
+</html>
