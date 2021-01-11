@@ -9,6 +9,14 @@ const $timelineControl = document.getElementById("timelineControl");
 const HIDE_CN = "hide";
 
 const timelineControlRect = $timelineControl.getBoundingClientRect();
+const timeLineRect = $timelineBar.getBoundingClientRect();
+// total video length
+// const duration = $player.duration;
+
+// check is dragging
+let isDown = false;
+
+let previousX = timelineControlRect.x;
 
 $player.removeAttribute("controls");
 
@@ -20,26 +28,41 @@ $pause.addEventListener("click", pauseVideo);
 $stop.addEventListener("click", stopVideo);
 // time update event
 $player.addEventListener("timeupdate", (e) => {
-    const duration = $player.duration;
     const currentTime = e.target.currentTime;
     setTime(currentTime);
+    updateTimeline(currentTime);
 });
 
 $player.addEventListener("ended", stopVideo);
 
 //timelineBar click event
 $timelineBar.addEventListener("click", (e) => {
-    const rect = e.target.getBoundingClientRect();
-    const width = rect.width;
-    const screenX = e.screenX;
+    const width = timeLineRect.width;
     const offsetX = e.offsetX;
-    const clientX = e.clientX;
 
     const widthRatio = offsetX / width;
     const toTime = Math.round(widthRatio * $player.duration);
 
     $player.currentTime = toTime;
     moveTimeLineControl(offsetX);
+});
+
+// timelinecontrol mouse down event
+$timelineControl.addEventListener("mousedown", e => {
+    isDown = true;
+})
+
+// timelinecontrol mouse up event
+$timelineControl.addEventListener("mouseup", (e) => {
+    isDown = false;
+});
+
+// timelinecontrol mouse move event
+$timelineControl.addEventListener("mousemove", (e) => {
+    if(isDown) {
+        const offsetX = e.pageX - previousX;
+        moveTimeLineControl(offsetX);
+    }
 });
 
 function playVideo(e) {
@@ -81,4 +104,13 @@ function convertTime(time) {
 
 function moveTimeLineControl(x) {
     $timelineControl.style.transform = `translateX(${x}px)`;
+}
+
+// 시간에 따라 컨트롤러 버튼 이동 함수
+function updateTimeline(time) {
+    const width = timeLineRect.width;
+    const duration = $player.duration;
+
+    const offsetX = time / duration * width;
+    moveTimeLineControl(offsetX);
 }
