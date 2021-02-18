@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Exchange Rate Calculator</title>
+  </head>
+  <body>
+    <div id="app">
+      <section class="container">
+        <!-- logo -->
+        <figure class="logo">
+          <img
+            src="https://vanillawebprojects.com/projects/exchange-rate/img/money.png"
+            alt="calculator logo"
+          />
+        </figure>
+
+        <!-- title -->
+        <h2 class="title">Exchange Rate Calculator</h2>
+
+        <!-- Description -->
+        <p class="description">
+          Choose the currency and the amounts to get the exchange rate
+        </p>
+
+        <!-- Calculator -->
+        <div class="calculator">
+          <div class="calculator__row">
+            <div class="calculator__item">
+              <select id="sourceUnit"></select>
+              <div class="calculator__exchange">
+                <input type="number" id="sourceAmmount" placeholder="0" />
+              </div>
+            </div>
+          </div>
+          <div class="calculator__row">
+            <div class="swap-wrapper">
+              <button type="button" class="swap-btn">Swap</button>
+              <span class="exchange-rate"> kor au </span>
+            </div>
+          </div>
+          <div class="calculator__row">
+            <div class="calculator__item">
+              <select id="destUnit"></select>
+              <div class="calculator__exchange">
+                <input type="number" id="destAmmount" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="./index.js"></script>
+  </body>
+</html>
